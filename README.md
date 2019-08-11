@@ -9,9 +9,11 @@ Its idea is that iframe from video will be loaded only after clicking on the vid
 
 ## HTML markup
 You can use that kind of markup
-`<div class="video">
+```HTML
+<div class="video">
   <img  class="video__media" 
         data-url="video id (1)"
         src="thumbnail image url (2)">
   <button class="video__button" type="button">Play</button>
-</div>`
+</div>
+```
