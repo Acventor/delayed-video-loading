@@ -5,9 +5,9 @@ If we need to add video to the page, we can use an iframe, which generates video
 
 Its idea is that iframe from video will be loaded only after clicking on the video itself and until then it is replaced by a cover image (which stores the link we need).
 
-The original script was created by awesome Vadim Makeev (https://youtu.be/4JS70KB9GS0). I only slightly impoved it and wrote the launch tutorial here.
+The original script was created by awesome **Vadim Makeev** (https://youtu.be/4JS70KB9GS0). I only slightly impoved it and wrote the launch tutorial here.
 
-*Note*: this script is only suitable for videos posted on YouTube.
+**Note**: this script is only suitable for videos posted on YouTube.
 
 ## HTML markup
 You can use that kind of markup:
