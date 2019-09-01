@@ -1,4 +1,4 @@
-# delayed-video-loading
+# init-video-on-click
 How to add any number of videos from YouTube to a website without long page loading
 
 If we need to add video to the page, we can use an iframe, which generates video hosting for us. But this method is quite "heavy" for pages, significantly increasing their weight even with one inserted video. The problem worsens with the increase in the number of such videos, so we can use a better way.
