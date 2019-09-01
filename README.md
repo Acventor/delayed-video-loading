@@ -132,3 +132,14 @@ class VideosLoader {
 
 export default VideosLoader;
 ```
+
+## Final step
+Let's import our script and initialize it
+```JS
+import VideosLoader from "./VideosLoader";
+
+const videosLoader = new VideosLoader();
+videosLoader.init();
+```
+
+That's all :) I hope that this small script will help you to optimize the loading of site pages. Have a nice day and coding!
