@@ -50,4 +50,87 @@ Minimal styles needed:
   cursor: pointer;
 }
 ```
+## JS script
+Now is the time for the essentials. Save this script as "VideoLoader.js"
+```JS
+class VideosLoader {
+  constructor() {
+    this.videos = undefined;
 
+    this.setupVideo = this.setupVideo.bind(this);
+    this.createIframe = this.createIframe.bind(this);
+    this.generateURL = this.generateURL.bind(this);
+    this.generateThumbnail = this.generateThumbnail.bind(this);
+  }
+
+  init() {
+    // Находим все видео на странице
+    this.videos = document.querySelectorAll('.video');
+
+    // И подключаем скрипт к каждому из них
+    for (let i = 0; i < this.videos.length; i++) {
+      this.setupVideo(this.videos[i]);
+    }
+  }
+
+  setupVideo(video) {
+    // Находим указанную ссылку на видео
+    let videoUrl = video.querySelector('.video__media').dataset.url;
+    // Берем из нее только последнюю часть с id
+    let videoId = videoUrl.split('/')[3];
+    // Находим кнопку проигрывателя
+    let button = video.querySelector('.video__button');
+    // Находим обложку и ее src атрибут
+    let videoThumbnail = video.querySelector('.video__media');
+    let videoThumbnailUrl = videoThumbnail.getAttribute('src');
+
+    // Если src пуст (мы не указали обложку), то генерируем ее самостоятельно
+    if (videoThumbnailUrl === '') {
+      this.generateThumbnail(videoId, videoThumbnail);
+    }
+
+    // По клику на видео (кнопку или превью) создаем iframe,
+    // также удаляя кнопку и обложку видео
+    video.addEventListener('click', () => {
+      let iframe = this.createIframe(videoId);
+
+      button.remove();
+      videoThumbnail.remove();
+      video.appendChild(iframe);
+    });
+  }
+
+  generateThumbnail(videoId, videoThumbnail) {
+    // Совмещаем адрес, по которому YouTube хранит обложки,
+    // с id нашего видео и создаем из них ссылку на изображение
+    let videoThumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+    videoThumbnail.setAttribute('src', videoThumbnailUrl);
+  }
+
+  createIframe(videoId) {
+    // Создаем iframe
+    let iframe = document.createElement('iframe');
+
+    // Устанавливаем необходимые для него атрибуты
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('allow', 'autoplay');
+    // Создаем внутри него ссылку на видео посредством функции generateURL
+    iframe.setAttribute('src', this.generateURL(videoId));
+    // Добавляем стили
+    iframe.classList.add('video__media');
+
+    return iframe;
+  }
+
+  generateURL(videoId) {
+    // Параметры запуска видео
+    let query = '?rel=0&showinfo=0&autoplay=1';
+
+    // Совмещаем адрес видеохостинга и id видео, 
+    // в конце добавляем параметры запуска 
+    return 'https://www.youtube.com/embed/' + videoId + query;
+  }
+}
+
+export default VideosLoader;
+```
