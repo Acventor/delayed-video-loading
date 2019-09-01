@@ -19,7 +19,7 @@ You can use that kind of markup:
 ```
 Please note the following points:
 1. This is a required point: the link to the video must be copied *not* from the url page, *but* from the "Share" button. Link example: https://youtu.be/ *4JS70KB9GS0* (the last part of link is the video id, which is the one we need).
-2. You can specify the path to your picture, or leave this attribute blank. Then the thumbnail of the selected video will be used.
+2. You can specify the path to your picture, or leave this attribute blank. In the second case, the video thumbnail will be used.
 
 ## CSS styles
 Minimal styles needed:
