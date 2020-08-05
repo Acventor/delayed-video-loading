@@ -50,7 +50,7 @@ Minimal styles needed:
 ```
 
 ## Final step
-Import script file and run it
+Download script's file, then import and run it
 ```JS
 import VideosLoader from "./script";
 
