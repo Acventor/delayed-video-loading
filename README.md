@@ -1,16 +1,12 @@
-# init-video-on-click
-How to add any number of videos from YouTube to a website without long page loading
-
-If we need to add video to the page, we can use an iframe, which generates video hosting for us. But this method is quite "heavy" for pages, significantly increasing their weight even with one inserted video. The problem worsens with the increase in the number of such videos, so we can use a better way.
-
-Its idea is that iframe from video will be loaded only after clicking on the video itself and until then it is replaced by a cover image (which stores the link we need).
+# youtube-onclick-loader
+Allows you to upload a youtube video only after clicking on it, showing a thumbnail picture before that. Useful if you want to improve your site's perfomance, especially if your page uses a lot of videos.
 
 The original script was created by awesome **Vadim Makeev** (https://youtu.be/4JS70KB9GS0). I only slightly impoved it and wrote the launch tutorial here.
 
 **Note**: this script is only suitable for videos posted on YouTube.
 
 ## HTML markup
-You can use that kind of markup:
+This markup will suffice:
 ```HTML
 <div class="video">
   <img  class="video__media" 
@@ -76,9 +72,9 @@ class VideosLoader {
   }
 
   setupVideo(video) {
-    // get the link of this video
+    // get the link of the video
     let videoUrl = video.querySelector('.video__media').dataset.url;
-    // get the last part of it (video id)
+    // save the last part of it (video id)
     let videoId = videoUrl.split('/')[3];
     // get play button
     let button = video.querySelector('.video__button');
@@ -86,13 +82,12 @@ class VideosLoader {
     let videoThumbnail = video.querySelector('.video__media');
     let videoThumbnailUrl = videoThumbnail.getAttribute('src');
 
-    // if src attr is empty generate original video thumbnail then
-    if (videoThumbnailUrl === '') {
+    // if src attr is empty generate original video's thumbnail then
+    if (!videoThumbnailUrl) {
       this.generateThumbnail(videoId, videoThumbnail);
     }
 
-    // by clicking on the button or the thumbnail, delete them 
-    // and create iframe with the video
+    // remove button and thumbnail after clicking on them and insert iframe instead
     video.addEventListener('click', () => {
       let iframe = this.createIframe(videoId);
 
@@ -103,8 +98,9 @@ class VideosLoader {
   }
 
   generateThumbnail(videoId, videoThumbnail) {
-    // connect the link to the YouTube thumbnail archive with the video id
+    // get a video's thumbnail
     let videoThumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+    // and set it
     videoThumbnail.setAttribute('src', videoThumbnailUrl);
   }
 
@@ -115,19 +111,19 @@ class VideosLoader {
     // set its necessary attributes
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('allow', 'autoplay');
-    // create video link by the generateURL script
+    // create video's link by the generateURL script
     iframe.setAttribute('src', this.generateURL(videoId));
-    // Add css class for our iframe
+    // Add css styles to iframe
     iframe.classList.add('video__media');
 
     return iframe;
   }
 
   generateURL(videoId) {
-    // video launch parameters
+    // video's launch parameters
     let query = '?rel=0&showinfo=0&autoplay=1';
 
-    // connect YouTube site link with the video id and launch parameters
+    // build video's link
     return 'https://www.youtube.com/embed/' + videoId + query;
   }
 }
@@ -136,7 +132,7 @@ export default VideosLoader;
 ```
 
 ## Final step
-Let's import our script and initialize it
+Let's import this script and initialize it
 ```JS
 import VideosLoader from "./VideosLoader";
 
@@ -144,4 +140,4 @@ const videosLoader = new VideosLoader();
 videosLoader.init();
 ```
 
-That's all :) I hope that this small script will help you to optimize the loading of site pages. Have a nice day and coding!
+That's all :) Hope this small script will help you to optimize loading of your sites. Have a nice day and coding!
