@@ -1,5 +1,5 @@
 # youtube-onclick-loader
-Allows you to upload a youtube video only after clicking on it, showing a thumbnail picture before that. Useful if you want to improve your site's perfomance, especially if your page uses a lot of videos.
+Allows you to upload a youtube video only after clicking on it, showing a placeholder picture before that. Useful if you want to improve your site's perfomance, especially if your page uses a lot of videos.
 
 The original script was created by awesome **Vadim Makeev** (https://youtu.be/4JS70KB9GS0). I only slightly impoved it and wrote the launch tutorial here.
 
@@ -11,7 +11,7 @@ This markup will suffice:
 <div class="video">
   <img  class="video__media" 
         data-url="video's link (1)"
-        src="thumbnail image's url (2)">
+        src="placeholder image's url (2)">
   <button class="video__button" type="button">Play</button>
 </div>
 ```
@@ -52,7 +52,7 @@ Minimal styles needed:
 Now is the time for the essentials. Save this script as "VideoLoader.js"
 ```JS
 class VideosLoader {
-  constructor() {
+  constructor(args) {
     this.videos = undefined;
 
     this.setupVideo = this.setupVideo.bind(this);
@@ -62,34 +62,38 @@ class VideosLoader {
   }
 
   init() {
-    // get all the videos on this page
+    // get all videos on this page
     this.videos = document.querySelectorAll('.video');
 
-    // init script for the all of them
-    for (let i = 0; i < this.videos.length; i++) {
-      this.setupVideo(this.videos[i]);
-    }
+    // init script for all of them
+    this.videos.forEach(video => {
+      this.setupVideo(video);
+    })
   }
 
   setupVideo(video) {
     // get the link of the video
-    let videoUrl = video.querySelector('.video__media').dataset.url;
+    const videoUrl = video.querySelector('.video__media').dataset.url;
+    // throw an error if link is not specified
+    if (!videoUrl) {
+      throw new Error('No video\'s link specified');
+    }
     // save the last part of it (video id)
-    let videoId = videoUrl.split('/')[3];
+    const videoId = videoUrl.split('/')[3];
     // get play button
-    let button = video.querySelector('.video__button');
+    const button = video.querySelector('.video__button');
     // get thumbnail container and its src attribute
-    let videoThumbnail = video.querySelector('.video__media');
-    let videoThumbnailUrl = videoThumbnail.getAttribute('src');
+    const videoThumbnail = video.querySelector('.video__media');
+    const videoThumbnailUrl = videoThumbnail.getAttribute('src');
 
-    // if src attr is empty generate original video's thumbnail then
+    // if thumbnail is not specified generate original video's thumbnail then
     if (!videoThumbnailUrl) {
       this.generateThumbnail(videoId, videoThumbnail);
     }
 
     // remove button and thumbnail after clicking on them and insert iframe instead
     video.addEventListener('click', () => {
-      let iframe = this.createIframe(videoId);
+      const iframe = this.createIframe(videoId);
 
       button.remove();
       videoThumbnail.remove();
@@ -99,16 +103,16 @@ class VideosLoader {
 
   generateThumbnail(videoId, videoThumbnail) {
     // get a video's thumbnail
-    let videoThumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
-    // and set it
+    const videoThumbnailUrl = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+    // and set it to video's placeholder
     videoThumbnail.setAttribute('src', videoThumbnailUrl);
   }
 
   createIframe(videoId) {
     // Create iframe
-    let iframe = document.createElement('iframe');
+    const iframe = document.createElement('iframe');
 
-    // set its necessary attributes
+    // set necessary attributes to it
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('allow', 'autoplay');
     // create video's link by the generateURL script
@@ -121,9 +125,8 @@ class VideosLoader {
 
   generateURL(videoId) {
     // video's launch parameters
-    let query = '?rel=0&showinfo=0&autoplay=1';
-
-    // build video's link
+    const query = '?rel=0&showinfo=0&autoplay=1';
+    // build new video's link
     return 'https://www.youtube.com/embed/' + videoId + query;
   }
 }
