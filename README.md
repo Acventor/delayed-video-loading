@@ -3,7 +3,7 @@ Allows you to upload a youtube video only after clicking on it, showing a thumbn
 
 The original script was created by awesome **Vadim Makeev** (https://youtu.be/4JS70KB9GS0). I only slightly impoved it and wrote the launch tutorial here.
 
-**Note**: this script is only suitable for videos posted on YouTube.
+**Note**: this script works with Youtube's videos only.
 
 ## HTML markup
 This markup will suffice:
