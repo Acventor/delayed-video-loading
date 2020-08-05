@@ -11,7 +11,7 @@ This markup will suffice:
 <div class="video">
   <img  class="video__media" 
         data-url="video's link (1)"
-        src="placeholder image's url (2)">
+        src="placeholder image's link (2)">
   <button class="video__button" type="button">Play</button>
 </div>
 ```
