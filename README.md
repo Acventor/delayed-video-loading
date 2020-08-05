@@ -10,14 +10,14 @@ This markup will suffice:
 ```HTML
 <div class="video">
   <img  class="video__media" 
-        data-url="video id (1)"
-        src="thumbnail image url (2)">
+        data-url="video's link (1)"
+        src="thumbnail image's url (2)">
   <button class="video__button" type="button">Play</button>
 </div>
 ```
 Please note the following points:
-1. This is a required point: the link to the video must be copied *not* from the url of page, *but* from the "Share" button. Link example: https://youtu.be/ *4JS70KB9GS0* (the last part of link is the video id, which is the one we need).
-2. You can specify the path to your picture, or leave this attribute blank. In the second case, the video thumbnail will be used.
+1. Use here the link of a video from Youtube's "Share" button.
+2. Use any picture or leave it blank (in that case the original thumbnail of a video will be used instead).
 
 ## CSS styles
 Minimal styles needed:
