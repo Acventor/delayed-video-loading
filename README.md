@@ -58,4 +58,4 @@ const videosLoader = new VideosLoader();
 videosLoader.init();
 ```
 
-That's all :) Hope this small script will help you to optimize loading of your sites. Have a nice day and coding!
+That's all :) Hope this small script will help you to optimize your sites. Have a nice day and coding!
