@@ -1,5 +1,5 @@
 # youtube-onclick-loader
-Allows you to upload a youtube video only after clicking on it, showing a placeholder picture before that. Useful if you want to improve your site's perfomance, especially if your page uses a lot of videos.
+Allows you to load a youtube video only after clicking on it, showing a placeholder picture before that. Useful if you want to improve your site's perfomance, especially if your page uses a lot of videos.
 
 The original script was created by awesome **Vadim Makeev** (https://youtu.be/4JS70KB9GS0). I only slightly impoved it and wrote the launch tutorial here.
 
