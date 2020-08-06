@@ -29,7 +29,7 @@ Minimal styles needed:
   background-color: #000;
 }
 
-/* Thumbnail; later video */
+/* Thumbnail picture/iframe */
 .video__media {
   position: absolute;
   top: 0;
